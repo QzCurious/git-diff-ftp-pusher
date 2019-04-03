@@ -68,12 +68,13 @@ cd $workdir
 unzip -o $workdir/diff.zip > /dev/null
 rm $workdir/diff.zip
 
+ftp_init
+
 # for each file, make directory for it in ftp server
 for file in $upload_files; do
     ftp_mkdir_p "$(dirname $file)"
 done
 
-ftp_init
 ftp_prepare_cmds "mput $(echo $upload_files)"
 ftp_send_cmd
 
